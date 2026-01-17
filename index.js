@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+
 const fs = require('fs');
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Guilds, GuildMessages, MessageContent } = GatewayIntentBits;
@@ -250,5 +253,15 @@ if (command === '-랭킹') {
     );
   }
 });
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Discord bot is running');
+});
+
+app.listen(PORT, () => {
+  console.log(`🌐 Web server listening on port ${PORT}`);
+});
 
 client.login(process.env.DISCORD_TOKEN);
+
