@@ -268,6 +268,11 @@ app.listen(PORT, () => {
   console.log(`🌐 Web server listening on port ${PORT}`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN)
+  .then(() => console.log('✅ Discord 로그인 성공'))
+  .catch(err => {
+    console.error('❌ Discord 로그인 실패:', err);
+  });
+
 
 
