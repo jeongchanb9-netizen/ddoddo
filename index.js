@@ -1,3 +1,4 @@
+let isLoggedIn = false;
 const express = require('express');
 const app = express();
 
@@ -268,11 +269,17 @@ app.listen(PORT, () => {
   console.log(`🌐 Web server listening on port ${PORT}`);
 });
 
-client.login(process.env.DISCORD_TOKEN)
-  .then(() => console.log('✅ Discord 로그인 성공'))
-  .catch(err => {
-    console.error('❌ Discord 로그인 실패:', err);
-  });
+if (!isLoggedIn) {
+  isLoggedIn = true;
+
+  client.login(process.env.DISCORD_TOKEN)
+    .then(() => console.log('✅ Discord 로그인 성공'))
+    .catch(err => {
+      isLoggedIn = false;
+      console.error('❌ Discord 로그인 실패:', err);
+    });
+}
+
 
 
 
