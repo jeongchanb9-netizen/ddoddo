@@ -256,12 +256,18 @@ if (command === '-랭킹') {
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('Discord bot is running');
+  res.status(200).json({
+    status: 'ok',
+    bot: client.user ? client.user.tag : 'starting',
+    time: new Date().toISOString(),
+  });
 });
+
 
 app.listen(PORT, () => {
   console.log(`🌐 Web server listening on port ${PORT}`);
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
 
